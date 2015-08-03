@@ -1,0 +1,31 @@
+def checkio(data):
+    result = 0
+    try:
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+        result += data.pop()
+    except IndexError:
+        return result
