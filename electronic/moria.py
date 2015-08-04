@@ -19,7 +19,7 @@ def find_word(message):
         score = calc_coefficient(x, y)
         scores[x].append(score)
         scores[y].append(score)
-    return sorted({w: average(l) for w, l in scores.items()}.items(), key=lambda x: (x[1], words.index(x[0])), reverse=True)[0][0]
+    return sorted([(w, average(l)) for w, l in scores.items()], key=lambda x: (x[1], words.index(x[0])), reverse=True)[0][0]
 
 
 if __name__ == '__main__':
