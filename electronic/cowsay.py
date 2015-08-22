@@ -44,14 +44,13 @@ def cowsay(text):
  {}'''
         rows = make_rows(text)
         width = max(len(x) for x in rows) + 2
-        concat = lambda x, y, z: x + ' ' + y + ' ' + z
         for i, row in enumerate(rows):
             if i == 0:
-                rows[i] = concat(BORDERS[0], rows[i].ljust(width - 2), BORDERS[1])
+                rows[i] = ' '.join([BORDERS[0], rows[i].ljust(width - 2), BORDERS[1]])
             elif i == len(rows) - 1:
-                rows[i] = concat(BORDERS[1], rows[i].ljust(width - 2), BORDERS[0])
+                rows[i] = ' '.join([BORDERS[1], rows[i].ljust(width - 2), BORDERS[0]])
             else:
-                rows[i] = concat(BORDERS[2], rows[i].ljust(width - 2), BORDERS[2])
+                rows[i] = ' '.join([BORDERS[2], rows[i].ljust(width - 2), BORDERS[2]])
         text = '\n'.join(rows)
     return quote.format(TOP * width, text, BOTTOM * width) + COW
 
