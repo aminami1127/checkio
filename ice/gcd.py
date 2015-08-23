@@ -1,4 +1,3 @@
-import itertools as it
 import functools as ft
 
 
@@ -10,25 +9,11 @@ def euclidean(a, b):
     return a
 
 
-def divisors(number):
-    i = 1
-    while i <= number:
-        if not number % i:
-            yield i
-        i += 1
-
-
 def greatest_common_divisor(*args):
     """
         Find the greatest common divisor
     """
-    # find max number of each number pair gcd's divisors that can divide all input numbers.
-    return max(
-        ft.reduce(
-            lambda x, y: x & y,
-            [set(divisors(euclidean(*sorted(x, reverse=True)))) for x in it.combinations(args, 2)]
-        )
-    )
+    return ft.reduce(lambda x, y: euclidean(*sorted((x, y), reverse=True)), args)
 
 
 if __name__ == '__main__':
