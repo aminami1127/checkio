@@ -1,8 +1,8 @@
 import functools
 
 
-def map_point(char):
-    double = (ord(char) - 48) * 2
+def map_point(val):
+    double = val * 2
     if double < 10:
         return double
     else:
@@ -10,9 +10,10 @@ def map_point(char):
 
 
 def checkio(data):
+    charseq = lambda x: ord(x) - 48
     clean = lambda L: [x for x in L if x.isalpha() or x.isdigit()]
     total = sum(
-        ord(x) - 48 if i % 2 else map_point(x) for i, x in enumerate(reversed(clean(data)))
+        x if i % 2 else map_point(x) for i, x in enumerate(map(charseq, reversed(clean(data))))
     )
     mod = total % 10
     final = 10 - mod if mod else 0
