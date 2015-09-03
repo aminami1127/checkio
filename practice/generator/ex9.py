@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 
-def even_odd_generator():
+def send_value_generator():
     i = (yield)
     while True:
         i = (yield i)
 
 
-sample = even_odd_generator()
+sample = send_value_generator()
 next(sample)
 print(sample.send('first'))
 print(sample.send('second'))
