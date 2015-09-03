@@ -1,5 +1,4 @@
 # -*- coding:utf-8 -*-
-
 import itertools
 
 infinite_generator = lambda x: (y ** 2 for y in itertools.count(x))
