@@ -18,3 +18,6 @@ class SampleIterator(object):
 
 sample = SampleIterator(1, 10)
 print([x for x in sample])
+print([x for x in sample])  # もうsampleは要素を返さない
+sample = SampleIterator(2, 20)
+print([x for x in sample])
