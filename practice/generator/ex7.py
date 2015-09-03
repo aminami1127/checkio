@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-class SampleEvenOdd(object):
+class EvenOddIterator(object):
     def __init__(self):
         self.i = 0
 
@@ -16,7 +16,7 @@ class SampleEvenOdd(object):
             else:
                 return 'even'
 
-sample = SampleEvenOdd()
+sample = EvenOddIterator()
 for i, x in enumerate(sample):
     print(x)
     if i > 1000:
