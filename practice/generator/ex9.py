@@ -1,6 +1,5 @@
 # -*- coding:utf-8 -*-
 
-
 def even_odd_generator():
     i = (yield)
     while True:

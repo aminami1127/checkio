@@ -1,6 +1,5 @@
 # -*- coding:utf-8 -*-
 
-
 class SampleEvenOdd(object):
     def __init__(self):
         self.i = 0

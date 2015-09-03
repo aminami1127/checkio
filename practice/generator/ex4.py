@@ -1,6 +1,5 @@
 # -*- coding:utf-8 -*-
 
-
 def infinite_generator(start):
     while True:
         yield start ** 2
