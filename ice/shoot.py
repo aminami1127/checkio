@@ -18,19 +18,17 @@ def calc_hitpoint(param1, param2):
 
 def shot(wall1, wall2, shot_point, later_point):
     avg = lambda x, y: (x + y) / 2
+    distance = lambda crd1, crd2: math.sqrt(sum((x[0] - x[1]) ** 2 for x in zip(crd1, crd2)))
     center = tuple(avg(c1, c2) for c1, c2 in zip(wall1, wall2))
 
     ballistic, param1 = calc_equation(shot_point, later_point)
     wall, param2 = calc_equation(wall1, wall2)
     point = calc_hitpoint(param1, param2)
+    wall_length = distance(wall1, wall2)
+    score = calc_equation((0, 100), (wall_length / 2, 0))[0]
 
     if ballistic(wall1[0]) >= wall1[1] and ballistic(wall2[0]) <= wall2[1]:
-        if point == center:
-            return 100
-        elif point == wall1 or point == wall2:
-            return 0
-        else:
-            return round(100 - math.sqrt(sum((x[0] - x[1]) ** 2 for x in zip(center, point))))
+        return round(score(distance(center, point)))
     else:
         return -1
 
