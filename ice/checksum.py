@@ -13,7 +13,8 @@ def checkio(data):
     charseq = lambda x: ord(x) - 48
     clean = lambda L: [x for x in L if x.isalpha() or x.isdigit()]
     total = sum(
-        x if i % 2 else map_point(x) for i, x in enumerate(map(charseq, reversed(clean(data))))
+        x if i % 2 else map_point(x)
+        for i, x in enumerate(map(charseq, reversed(clean(data))))
     )
     mod = total % 10
     final = 10 - mod if mod else 0

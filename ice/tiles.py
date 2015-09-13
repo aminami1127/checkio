@@ -5,7 +5,8 @@ from math import ceil, hypot
 def checkio(radius):
     """count tiles"""
     crds = [
-        ((x1, y1), (x2, y2)) for x1, y1, x2, y2 in it.product(range(ceil(radius + 1)), repeat=4)
+        ((x1, y1), (x2, y2))
+        for x1, y1, x2, y2 in it.product(range(ceil(radius + 1)), repeat=4)
         if x2 == x1 + 1 and y2 == y1 + 1
     ]
     # p: lower left coordinate of each squares
