@@ -7,11 +7,6 @@ def cofactor(matrix, row_num, col_num):
 def checkio(matrix):
     if len(matrix) == 1:
         return matrix[0][0]
-
-    elif len(matrix) == 2:
-        a, b, c, d = matrix[0][0], matrix[1][0], matrix[0][1], matrix[1][1]
-        return a * d - b * c
-
     else:
         sign = lambda i: -1 if i % 2 else 1
         return sum(
