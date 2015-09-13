@@ -10,7 +10,8 @@ def checkio(matrix):
     else:
         sign = lambda i: -1 if i % 2 else 1
         return sum(
-            matrix[j][0] * checkio(cofactor(matrix, 0, j)) * sign(i) for i, j in enumerate(range(len(matrix)))
+            matrix[j][0] * checkio(cofactor(matrix, 0, j)) * sign(i)
+            for i, j in enumerate(range(len(matrix)))
         )
 
 
