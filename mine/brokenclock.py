@@ -15,8 +15,8 @@ def broken_clock(starting_time, wrong_time, error_description):
     time_diff_sec = lambda x, y: sum((int(k) - int(j)) * (60 ** i)
                                      for i, (j, k) in enumerate(
                                      reversed(
-                                         list(zip(x.split(':'), y.split(':'))))
-                                     ))
+                                         list(zip(x.split(':'), y.split(':')))
+                                     )))
     elapsed_sec = int(time_diff_sec(starting_time, wrong_time)) / (1 + err_per_sec)
     return datetime.strftime(
         datetime.strptime(starting_time, '%H:%M:%S') + timedelta(seconds=elapsed_sec),
