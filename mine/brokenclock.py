@@ -9,9 +9,8 @@ def to_sec(unit):
 
 
 def broken_clock(starting_time, wrong_time, error_description):
-    a, b, c = error_description.split(maxsplit=2)
-    d, e = c.split()[1:]
-    err_per_sec = (int(a) * to_sec(b)) / (int(d) * to_sec(e))
+    a, b, c, d = error_description.replace('at ', '').split()
+    err_per_sec = (int(a) * to_sec(b)) / (int(c) * to_sec(d))
     time_diff_sec = lambda x, y: sum((int(k) - int(j)) * (60 ** i)
                                      for i, (j, k) in enumerate(
                                      reversed(
