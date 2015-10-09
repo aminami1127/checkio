@@ -4,7 +4,7 @@ SYMBOLS = 'ADFGVX'
 def divide(length, word):
     """divide the word by length size"""
     i = 0
-    for _ in range(length):
+    while True:
         sliced = word[i:i+length]
         if not sliced:
             break
@@ -53,29 +53,35 @@ def decode(message, secret_alphabet, keyword):
     # num of the characters that each key alphabet related
     size_of_keyalphas = zip(
         uniqued_key,
-        [len([y for y in x if y.isalpha()]) for x in zip(*divide(len(uniqued_key), message))]
+        [len([y for y in x if y.isalpha()])
+         for x in zip(*divide(len(uniqued_key), message))]
     )
 
-    # create matrix to decode message
+    # create matrix to decode original message
     i, sorted_matrix = 0, []
     for k, size in sorted(size_of_keyalphas, key=lambda x: x[0]):
         sorted_matrix.append(message[i:i+size])
         i += size
     matrix = list(
-        x[1].ljust(len(sorted_matrix)) for x in
-        sorted(zip(sorted(uniqued_key), sorted_matrix), key=lambda x: keyword.index(x[0]))
+        x[1] for x in sorted(
+            zip(sorted(uniqued_key), sorted_matrix), key=lambda x: keyword.index(x[0])
+        )
     )
-    message = ''.join(''.join(x) for x in zip(*matrix)).strip()
+    # append white space to the matrix
+    matrix = [x.ljust(max(len(x) for x in matrix)) for x in matrix]
+    message = ''.join(
+        ''.join(x) for x in zip(*matrix)
+    ).strip()
 
     # decode each pair characters of the message by convert_square
     decoded = ''
     convert = convert_square(secret_alphabet)
-    iter_message = zip(message, message[1:])
-    for i, j in iter_message:
+    iter_message_pairs = zip(message, message[1:])
+    for i, j in iter_message_pairs:
         decoded += convert[SYMBOLS.index(i)][SYMBOLS.index(j)]
         try:
-            next(iter_message)
-        except:
+            next(iter_message_pairs)
+        except StopIteration:
             break
     return decoded
 
