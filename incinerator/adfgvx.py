@@ -1,4 +1,4 @@
-SYMBOLS = 'ADFGVX'
+CIPHER = 'ADFGVX'
 
 
 def divide(length, word):
@@ -22,7 +22,7 @@ def uniqualize(keyword):
 
 
 def convert_square(secret_alphabet):
-    return [x for x in divide(len(SYMBOLS), secret_alphabet)]
+    return [x for x in divide(len(CIPHER), secret_alphabet)]
 
 
 def encode(message, secret_alphabet, keyword):
@@ -32,7 +32,7 @@ def encode(message, secret_alphabet, keyword):
     # convert message by secret_alphabet square
     converted = ''.join(
         ''.join(
-            SYMBOLS[i] + SYMBOLS[row.index(c)]
+            CIPHER[i] + CIPHER[row.index(c)]
             for i, row in enumerate(convert) if c in row
         )
         for c in clean(message)
@@ -78,7 +78,7 @@ def decode(message, secret_alphabet, keyword):
     convert = convert_square(secret_alphabet)
     iter_message_pairs = zip(message, message[1:])
     for i, j in iter_message_pairs:
-        decoded += convert[SYMBOLS.index(i)][SYMBOLS.index(j)]
+        decoded += convert[CIPHER.index(i)][CIPHER.index(j)]
         try:
             next(iter_message_pairs)
         except StopIteration:
