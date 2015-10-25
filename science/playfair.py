@@ -38,9 +38,27 @@ def to_table(text, length):
 
 def encode(message, key):
     uniqualize = lambda L: ''.join(sorted(list(set(L)), key=lambda x: L.index(x)))
+    get_index = lambda L, c: list(filter(lambda x: x, (
+        [(i, j) for j, x in enumerate(row) if x == c] for i, row in enumerate(L)
+    )))[0][0]
     key_table = to_table(uniqualize(uniqualize(key) + alpha + digits), TABLE_SIZE)
     prepared = prepare_message(message)
-    import pdb;pdb.set_trace()
+    encoded = ''
+    for pair in prepared:
+        a, b = get_index(key_table, pair[0]), get_index(key_table, pair[1])
+        # same row
+        if a[0] == b[0]:
+            encoded += key_table[a[0]][a[1] + 1] if a[1] != TABLE_SIZE - 1 else key_table[a[0]][0]
+            encoded += key_table[b[0]][b[1] + 1] if b[1] != TABLE_SIZE - 1 else key_table[b[0]][0]
+        # same column
+        elif a[1] == b[1]:
+            encoded += key_table[a[0] + 1][a[1]] if a[0] != TABLE_SIZE - 1 else key_table[0][a[0]]
+            encoded += key_table[b[0] + 1][b[1]] if b[0] != TABLE_SIZE - 1 else key_table[0][b[0]]
+        # rect
+        else:
+            encoded += key_table[a[0]][b[1]]
+            encoded += key_table[b[0]][a[1]]
+    return encoded
 
 
 def decode(secret_message, key):
